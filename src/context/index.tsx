@@ -16,10 +16,10 @@ if (!projectId) {
 
 // Set up metadata
 const metadata = {
-  name: 'Reown Playground',
-  description: 'Learning Web3 step-by-step with Reown AppKit',
+  name: 'Wallet Control Panel',
+  description: 'A developer-friendly playground to explore wallet features with Reown AppKit',
   url: 'http://localhost:3000', // origin must match your domain & subdomain
-  icons: ['https://avatars.githubusercontent.com/u/179229932']
+  icons: ['https://reown.network/favicon.ico'], // must be a valid URL to an icon
 }
 
 // Create the modal
@@ -33,6 +33,7 @@ const modal = createAppKit({
     analytics: true,
     email: true,
     socials: ['google'],
+    emailShowWallets: true,
   }
 })
 

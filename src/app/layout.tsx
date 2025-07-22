@@ -1,15 +1,18 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
-import { headers } from 'next/headers' // added
-import ContextProvider from '@/context'
+import { headers } from 'next/headers';
+import ContextProvider from '@/context';
 
 export const metadata: Metadata = {
-  title: 'Reown Playground',
-  description: 'Learning Web3 step-by-step with Reown AppKit',
+  title: 'Wallet Control Panel',
+  description: 'A developer-friendly playground to explore wallet features with Reown AppKit',
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default async function RootLayout({
