@@ -34,7 +34,8 @@ const modal = createAppKit({
     email: true,
     socials: ['google'],
     emailShowWallets: true,
-  }
+  },
+  allWallets: "HIDE",
 })
 
 function ContextProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {
