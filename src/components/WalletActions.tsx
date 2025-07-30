@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from "react";
 import { useAppKit } from "@reown/appkit/react";
 import { useAccount, useDisconnect } from 'wagmi';
 import { ArrowLeft, Wallet, Repeat, Send, LogOut, User } from 'lucide-react';
@@ -9,6 +10,12 @@ export default function WalletActions() {
   const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { open } = useAppKit();
+
+  useEffect (() => {
+    if(!isConnected) {
+      window.location.href = "/";
+    }
+  }, [isConnected])
 
   return (
     <div className="h-screen w-full bg-gradient-to-br from-gray-100 via-white to-gray-200 flex items-center justify-center relative px-4">
