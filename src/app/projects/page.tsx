@@ -8,11 +8,37 @@ import ProjectCard from '@/components/ProjectCard';
 
 export default function ProjectsPage() {
   const [showDialog, setShowDialog] = useState(false);
-  
+
   const projects = [
-    { id: '1', name: 'Marketing Dashboard', tasks: 12 },
-    { id: '2', name: 'Product Roadmap', tasks: 7 },
-    { id: '3', name: 'Client Work', tasks: 20 },
+    {
+      id: '1', 
+      projctImage: "",
+      shortName: "s", 
+      logo: "", 
+      createdAt: "", 
+      description: "",
+      users: [
+        {
+          name: "Jaya Surya",
+          email: "jayasurya@sparkouttech.com",
+          designation: "Jr. Front-end Developer"
+        },
+        {
+          name: "Hari",
+          email: "hariharan@sparkouttech.com",
+          designation: "Jr. Front-end Developer"
+        },
+        {
+          name: "Hari",
+          email: "hariharan@sparkouttech.com",
+          designation: "Jr. Front-end Developer"
+        }
+      ], 
+    name: 'Marketing Dashboard',
+    tasks: 12
+    },
+    { id: '2', projctImage: "", shortName: "shortName", logo: "", createdAt: "", description: "", users: [], name: 'Product Roadmap', tasks: 7 },
+    { id: '3', projctImage: "", shortName: "shortName shortName", logo: "", createdAt: "", description: "", users: [], name: 'Client Work', tasks: 20 },
   ];
 
   return (
