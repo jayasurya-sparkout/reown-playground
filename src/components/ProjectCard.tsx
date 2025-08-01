@@ -3,6 +3,8 @@
 import { Card, CardHeader, CardAction, CardContent, CardDescription, CardFooter, CardTitle } from "./ui/card";
 import { useRouter, usePathname } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { AspectRatio } from "./ui/aspect-ratio";
 
 interface ProjectDetailsProps {
     isProject: boolean;
@@ -36,8 +38,17 @@ export default function ProjectCard({ isProject, project, task }: ProjectDetails
                 }
             }}
         >
-            <CardHeader>
-                <CardTitle className="text-lg">
+            <CardHeader className="relative">
+                <AspectRatio ratio={16 / 9} className="bg-muted rounded-lg">
+                    <Image
+                        src=""
+                        alt="Photo by Drew Beamer"
+                        fill
+                        className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+                    />
+                </AspectRatio>
+
+                <CardTitle className={`text-lg ${isProject && "absolute top-1/2 left-8"}`}>
                     {isProject ? (
                         <div className="">{project?.name}</div>
                     ) : (

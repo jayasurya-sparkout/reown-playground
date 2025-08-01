@@ -20,14 +20,6 @@ export default function WalletActions() {
   return (
     <div className="h-screen w-full bg-gradient-to-br from-gray-100 via-white to-gray-200 flex items-center justify-center relative px-4">
 
-      <Link
-        href="/"
-        className="absolute top-2 left-2 flex items-center gap-2 text-gray-600 hover:text-black transition m-2.5"
-      >
-        <ArrowLeft size={20} />
-        <span className="font-medium text-sm">Back</span>
-      </Link>
-
       <div className="w-full max-w-sm bg-white p-6 rounded-2xl shadow-xl space-y-4 border border-gray-200">
         <h2 className="text-xl font-semibold text-gray-800 text-center mb-2">
           {isConnected ? "Wallet Actions" : "Welcome"}
