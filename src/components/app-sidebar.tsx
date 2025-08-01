@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import {
-  IconDashboard,
+  IconHome2,
   IconInnerShadowTop,
   IconBrandProducthunt,
 } from "@tabler/icons-react";
@@ -26,9 +26,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const navMain = [
     {
-      title: "Dashboard",
+      title: "Home",
       url: "/dashboard",
-      icon: IconDashboard,
+      icon: IconHome2,
     },
     {
       title: "Projects",
