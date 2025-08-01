@@ -12,15 +12,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
 
+  const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isRgisterForm, setIsRgisterForm] = useState<boolean>(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     
@@ -62,6 +64,50 @@ export function LoginForm({
 
   }
 
+  const handleRegister = async (e: React.FormEvent) => {
+    
+    e.preventDefault();
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!name.trim()) {
+      console.log("Please enter your organisation email.");
+      return;
+    }
+    if (!email.trim()) {
+      console.log("Please enter your organisation email.");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      console.log("Please enter a valid email address.");
+      return;
+    }
+    if (!password.trim()) {
+      console.log("Please enter your password.");
+      return;
+    }
+
+    try {
+
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(
+          { name, email, password }
+        )
+      });
+
+      const data = res.json();
+
+      console.log(data, 'data');
+
+    } catch (error) {
+      console.log(error, "err");
+    }
+
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -72,7 +118,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={isRgisterForm ? handleRegister : handleLogin}>
             <div className="grid gap-6">
               <div className="flex-col gap-4 hidden">
                 <Button variant="outline" className="w-full">
@@ -100,6 +146,19 @@ export function LoginForm({
                 </span>
               </div>
               <div className="grid gap-6">
+                {isRgisterForm && (
+                  <div className="grid gap-3">
+                    <Label htmlFor="email">Name</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="john"
+                      className="focus-visible:ring-transparent border-2 border-border"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                )}
                 <div className="grid gap-3">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -130,15 +189,30 @@ export function LoginForm({
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <Button type="submit" className="w-full">
-                  Login
+                <Button type="submit" className="w-full cursor-pointer">
+                  {isRgisterForm ? "Register" : "Login"}
                 </Button>
               </div>
-              <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
-                  Sign up
-                </a>
+              <div className="text-center text-sm flex justify-center gap-1">
+                {!isRgisterForm ? (
+                 <div className="flex gap-1">
+                    <div className="">
+                      Don&apos;t have an account?{" "}
+                    </div>
+                    <div className="underline underline-offset-4 cursor-pointer" onClick={() => setIsRgisterForm(true)}>
+                      Sign up
+                    </div>
+                 </div>
+                ) : (
+                  <div className="flex gap-1">
+                    <div className="">
+                      Already have an account?{" "}
+                    </div>
+                    <div className="underline underline-offset-4 cursor-pointer" onClick={() => setIsRgisterForm(false)}>
+                      Sign In
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </form>
