@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "react-toastify";
 
 import { useState } from "react";
 
@@ -30,15 +31,15 @@ export function LoginForm({
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email.trim()) {
-      console.log("Please enter your organisation email.");
+      toast.error("Please enter your email.", { toastId: "email" });
       return;
     }
     if (!emailRegex.test(email)) {
-      console.log("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.", { toastId: "invalid-email" });
       return;
     }
     if (!password.trim()) {
-      console.log("Please enter your password.");
+      toast.error("Please enter your password.", { toastId: "invalid-pass" });
       return;
     }
 
@@ -54,12 +55,20 @@ export function LoginForm({
         )
       });
 
-      const data = res.json();
+      const data = await res.json();
 
-      console.log(data, 'data');
+      if (data.status) {
+        localStorage.setItem("userName", data.userDetails.name);
+        localStorage.setItem("userEmail", data.userDetails.email);
+        localStorage.setItem("userId", data.userDetails.id);
+        toast.success(data.message);
+        window.location.href="/dashboard";
+      } else {
+        toast.error(data.error, { toastId: 'error' })
+      }
 
-    } catch (error) {
-      console.log(error, "err");
+    } catch (error: any) {
+      toast.error(error, { toastId: 'err' });
     }
 
   }
@@ -70,19 +79,19 @@ export function LoginForm({
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!name.trim()) {
-      console.log("Please enter your organisation email.");
+      toast.error("Please enter name.", { toastId: "name" });
       return;
     }
     if (!email.trim()) {
-      console.log("Please enter your organisation email.");
+      toast.error("Please enter your email.", { toastId: "email" });
       return;
     }
     if (!emailRegex.test(email)) {
-      console.log("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.", { toastId: "invalid-email" });
       return;
     }
     if (!password.trim()) {
-      console.log("Please enter your password.");
+      toast.error("Please enter your password.", { toastId: "invalid-pass" });
       return;
     }
 
@@ -98,12 +107,16 @@ export function LoginForm({
         )
       });
 
-      const data = res.json();
+      const data = await res.json();
 
-      console.log(data, 'data');
+      if (data.status) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.error, { toastId: 'err' })
+      }
 
-    } catch (error) {
-      console.log(error, "err");
+    } catch (error: any) {
+      toast.error(error, { toastId: 'error' })
     }
 
   }
@@ -163,7 +176,7 @@ export function LoginForm({
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
-                    type="email"
+                    type="text"
                     placeholder="m@example.com"
                     className="focus-visible:ring-transparent border-2 border-border"
                     value={email}

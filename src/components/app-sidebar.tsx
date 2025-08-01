@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { useAccount } from "wagmi";
+import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { isConnected } = useAccount();
@@ -46,11 +47,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       : []),
   ];
 
-  const user = {
-    name: "Jaya Surya",
-    email: "suryajaya4899@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
-  };
+  const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    const name = localStorage.getItem('userName');
+    const email = localStorage.getItem('userEmail');
+
+    setUserEmail(email!);
+    setUserName(name!);
+  }, []);
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -73,7 +79,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser user={{
+          name: userName,
+          email: userEmail,
+        }} />
       </SidebarFooter>
     </Sidebar>
   )
