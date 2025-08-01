@@ -38,7 +38,7 @@ export default function ProjectCard({ isProject, project, task }: ProjectDetails
                 }
             }}
         >
-            <CardHeader className="relative">
+            <CardHeader className="relative gap-0 px-0 mx-6">
                 <AspectRatio ratio={16 / 9} className="bg-muted rounded-lg">
                     <Image
                         src=""
@@ -48,7 +48,7 @@ export default function ProjectCard({ isProject, project, task }: ProjectDetails
                     />
                 </AspectRatio>
 
-                <CardTitle className={`text-lg ${isProject && "absolute top-1/2 left-8"}`}>
+                <CardTitle className={`text-lg ${isProject && "absolute top-1/2 left-6"}`}>
                     {isProject ? (
                         <div className="">{project?.name}</div>
                     ) : (
