@@ -3,8 +3,7 @@
 import { useEffect } from "react";
 import { useAppKit } from "@reown/appkit/react";
 import { useAccount, useDisconnect } from 'wagmi';
-import { ArrowLeft, Wallet, Repeat, Send, LogOut, User } from 'lucide-react';
-import Link from 'next/link';
+import { Wallet, Repeat, Send, LogOut, User } from 'lucide-react';
 
 export default function WalletActions() {
   const { isConnected } = useAccount();

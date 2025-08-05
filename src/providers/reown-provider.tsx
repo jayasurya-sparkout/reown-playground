@@ -2,7 +2,7 @@
 import { createAppKit } from '@reown/appkit/react';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { wagmiAdapter, networks } from '@/config'
+import { wagmiAdapter } from '@/config'
 import { mainnet, solana } from "@reown/appkit/networks"
 
 const queryClient = new QueryClient()

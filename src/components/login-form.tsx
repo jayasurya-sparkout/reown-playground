@@ -63,7 +63,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       } else {
         toast.error(data.error || "Something went wrong.", { toastId: "error" });
       }
-    } catch (error) {
+    } catch {
       toast.error("Unexpected error occurred.", { toastId: "catch-error" });
     }
   };
